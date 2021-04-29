@@ -1,5 +1,6 @@
 package com.analyzer;
 
+import com.sun.javafx.font.Metrics;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
@@ -38,6 +39,9 @@ public class SourceCodeLoader {
                     System.out.println(fileContent);
 
                 }
+
+                CalcMetrics.calcLoc(files);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
