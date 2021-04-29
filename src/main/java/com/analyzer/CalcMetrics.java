@@ -25,11 +25,18 @@ public class CalcMetrics {
         int lines = 1;
         Matcher m = EOL_PATTERN.matcher(fileContent);
 
-        while (m.find())
-        {
+        while (m.find()) {
             lines ++;
         }
 
         return lines;
+    }
+
+    public static void countComments(List<File> files) {
+
+    }
+
+    public static float calcCodeToCommentRatio(List<File> files) {
+        return 0.0f;
     }
 }
