@@ -1,6 +1,5 @@
 package com.analyzer;
 
-import com.sun.javafx.font.Metrics;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
