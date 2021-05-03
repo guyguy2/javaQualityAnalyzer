@@ -1,6 +1,5 @@
 package com.analyzer;
 
-import com.sun.javafx.font.Metrics;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
@@ -52,5 +51,6 @@ public class SourceCodeLoader {
         }
         System.out.println();
         System.out.println("Total java files found: " + fileCount);
+        System.out.println("Total comments   found: " + CalcMetrics.totalComments());
     }
 }
