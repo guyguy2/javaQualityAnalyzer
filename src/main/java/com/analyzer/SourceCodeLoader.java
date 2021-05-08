@@ -51,6 +51,6 @@ public class SourceCodeLoader {
         }
         System.out.println();
         System.out.println("Total java files found: " + fileCount);
-        System.out.println("Total comments   found: " + CalcMetrics.totalComments());
+        
     }
 }
