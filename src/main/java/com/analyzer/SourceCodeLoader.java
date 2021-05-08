@@ -5,7 +5,6 @@ import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,9 +14,8 @@ import java.util.List;
 //TODO save data
 //use https://github.com/gt4dev/yet-another-tree-structure for inheritance / dependencies tree?
 public class SourceCodeLoader {
-    private String location; /// remove?
-    private static int fileCount = 0;
-    private static List<String> javaFileList = new ArrayList<>();
+    private static final List<String> javaFilePathList = new ArrayList<>();
+    private static final List<File> javaFileObjects = new ArrayList<>();
 
     public static void load(String directory) {
         Path path = Paths.get(directory);
@@ -26,31 +24,31 @@ public class SourceCodeLoader {
             File directoryPath = new File(directory);
 
             try {
-                System.out.println("Getting all files in " + directoryPath.getCanonicalPath() + " including those in subdirectories");
+                System.out.println("Getting all java files in " + directoryPath.getCanonicalPath() + " including those in subdirectories");
                 List<File> files = (List<File>) FileUtils.listFiles(directoryPath, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
                 for (File file : files) {
+                    javaFileObjects.add(file);
                     System.out.println("file: " + file.getCanonicalPath());
                     if (file.getCanonicalPath().endsWith(".java")) {
-                        fileCount++;
-                        javaFileList.add(file.getCanonicalPath());
+                        javaFilePathList.add(file.getCanonicalPath());
                     }
-                    String fileContent = FileUtils.readFileToString(file, Charset.defaultCharset());
-                    System.out.println(fileContent);
-
                 }
 
-                CalcMetrics.calcLoc(files);
+                calculateMetrics();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
         } else {
-            System.out.println("path is not a directory");
-            ///exit
+            System.err.println("path is not a directory. Exiting.");
+            System.exit(1);
         }
-        System.out.println();
-        System.out.println("Total java files found: " + fileCount);
-        
     }
+
+    private static void calculateMetrics() throws IOException {
+        MetricsManager metricsManager = new MetricsManager(javaFilePathList, javaFileObjects);
+        metricsManager.calcMetrics();
+    }
+
 }
