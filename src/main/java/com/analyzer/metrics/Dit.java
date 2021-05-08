@@ -1,5 +1,13 @@
 package com.analyzer.metrics;
 
-//Depth of Inheritance
-public class Dit {
+import com.analyzer.interfaces.Metric;
+
+public class Dit implements Metric {
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
