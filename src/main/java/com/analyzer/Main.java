@@ -2,6 +2,7 @@ package com.analyzer;
 
 public class Main {
 
+    //TODO https://github.com/javaparser/javaparser ?
     public static void main(String[] args) {
         System.out.println("Java Quality Analyzer (c) Spring 2021 - SE433 - Group 2");
 
