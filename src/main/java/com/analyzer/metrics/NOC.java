@@ -27,10 +27,13 @@ public class NOC extends Metric {
 
 		}
 		numberOfChildrenPerFile.remove("[]");
+		System.out.println();
+		System.out.println("--------------------------------------------------");
 		for(Map.Entry<String, Integer> numChildren: numberOfChildrenPerFile.entrySet()) {
 			
-			System.out.println("Class: " + numChildren.getKey());
-			System.out.println("\t Number of children: " + numChildren.getValue());
+			System.out.println(String.format("Class: "+"%-8s --> %-28s |", numChildren.getKey(),numChildren.getValue()));
+			System.out.println("--------------------------------------------------");
+
 		}
 	}
 	

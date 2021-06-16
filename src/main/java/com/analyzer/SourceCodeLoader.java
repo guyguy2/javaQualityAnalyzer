@@ -20,11 +20,11 @@ public class SourceCodeLoader {
     public static void load(String directory) {
         Path path = Paths.get(directory);
         if (Files.isDirectory(path)) {
-            System.out.println("path is a directory");
+            System.out.println("Path is a directory\n");
             File directoryPath = new File(directory);
 
             try {
-                System.out.println("Getting all java files in " + directoryPath.getCanonicalPath() + " including those in subdirectories");
+                System.out.println("Getting all java files in " + directoryPath.getCanonicalPath() + " including those in subdirectories:");
                 List<File> files = (List<File>) FileUtils.listFiles(directoryPath, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
                 for (File file : files) {
                     javaFileObjects.add(file);

@@ -90,55 +90,23 @@ public class Utils {
 		return classNames;
 	}
 
-	public static List<Path> parseDIT(List<Path> main) {
+	public static List<String> parseDIT(File classFile, Map<String,String> DIT) {
 		// List<String> classNames = new ArrayList<>();
 		try {
-			/*
-			 * int maxDIT = 1; CompilationUnit s = StaticJavaParser.parse(classFile); String
-			 * className = s.getTypes().get(0).getName().toString();
-			 * ClassOrInterfaceDeclaration classToCheck =
-			 * s.getClassByName(className).orElse(null); System.out.println("Extends: "
-			 * +classToCheck.getExtendedTypes().toString());
-			 * System.out.println("Implements: "
-			 * +classToCheck.getImplementedTypes().toString());
-			 */
-			/*
-			 * if(classToCheck.getExtendedTypes().size() != 0) {
-			 * System.out.println("Has parent: "+
-			 * classToCheck.getExtendedTypes().get(0).toString());
-			 * 
-			 * maxDIT++; classToCheck =
-			 * s.getClassByName(classToCheck.getExtendedTypes().getFirst().toString()).
-			 * orElse(null); System.out.println("Extends: " +classToCheck);
-			 * 
-			 * }
-			 */
-			// CompilationUnit s = StaticJavaParser.parse
-			// JavaParserTypeSolver s = new JavaParserTypeSolver(main.get(0));
-			// System.out.println(main.get(0).getFileName().toString());
+		
+			 CompilationUnit s = StaticJavaParser.parse(classFile);
+			  String className = s.getTypes().get(0).getName().toString();
+				/*
+				 * if(DIT.get(className)==null) { DIT.put(className, ""); }
+				 */
+			  ClassOrInterfaceDeclaration classToCheck = s.getClassByName(className).orElse(null);
+			  String _class = classToCheck.getExtendedTypes().toString();
 
-			// ParseResult<CompilationUnit> mainS = new JavaParser().parse(main.get(0));
-			int j = 0;
-			Map<String, String> map = new HashMap<>();
-			System.out.println(map.toString());
-			SourceRoot sourceRoot = new SourceRoot(main.get(0));
-			List<ParseResult<CompilationUnit>> mainS = sourceRoot.tryToParse();
-			List<CompilationUnit> compilations = sourceRoot.getCompilationUnits();
-			for (int i = 0; i < compilations.size(); i++) {
-				String className = compilations.get(i).getTypes().get(0).getName().toString();
-				ClassOrInterfaceDeclaration classToCheck = compilations.get(i).getClassByName(className).orElse(null);
-				if (!map.containsKey(className)) {
-					if (classToCheck.getExtendedTypes().size() > 0) {
-						map.put(className, classToCheck.getExtendedTypes().get(0).toString());
-						j++;
-					}
-				}
-
-			}
-
-			System.out.println(map.toString());
-			// Map<String,Integer> check = checkDIT(map);
-			// System.out.println(check.toString());
+			  if(DIT.get(_class)==null) {
+				  DIT.put(_class, "");
+			  }
+			  
+			  DIT.put("["+className+"]", _class);
 
 		} catch (Exception e) {
 			System.out.println("error");
@@ -168,7 +136,7 @@ public class Utils {
 			  s = StaticJavaParser.parse(classFile);
 			  String className = s.getTypes().get(0).getName().toString();
 			  if(numOfChildren.get(className)==null) {
-				  numOfChildren.put(className, 0); 
+				  numOfChildren.put("["+className+"]", 0); 
 			  }
 			  ClassOrInterfaceDeclaration classToCheck = s.getClassByName(className).orElse(null);
 			  String _class = classToCheck.getExtendedTypes().toString();

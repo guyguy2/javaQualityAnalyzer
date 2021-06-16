@@ -4,7 +4,7 @@ public class Main {
 
     //TODO https://github.com/javaparser/javaparser ?
     public static void main(String[] args) {
-        System.out.println("Java Quality Analyzer (c) Spring 2021 - SE433 - Group 2");
+        System.out.println("Java Quality Analyzer (c) Spring 2021 - SE433 - Group 2\n");
 
         if (args.length == 0) {
             printUsage();
@@ -13,8 +13,8 @@ public class Main {
             printUsage();
         } else {
             String directory = args[0];
-            System.out.println("Current working directory = '" + System.getProperty("user.dir") + "'");
-            System.out.println("Scanning directory '" + directory + "'");
+            System.out.println("Current working directory = '" + System.getProperty("user.dir") + "'"+"\n");
+            System.out.println("Scanning directory '" + directory + "'"+"\n");
             SourceCodeLoader.load(directory);
         }
     }
